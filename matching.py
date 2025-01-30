@@ -6,27 +6,39 @@ from skimage import exposure
 import os
 import glob
 
+#load image to a var
 def load_image(filename):
   img = cv2.imread(filename)
   rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
   return rgb
 
+#show image
 def show_image(image):
-  plt.figure(figsize=(12,5))
+  #plt.figure(figsize=(12,5))
   plt.imshow(image)
   plt.axis('off')
   plt.show()
+
+image = load_image('testimg.jpg')
+#show_image(image)
 
 def calculate_hist(image):
   fig,ax = plt.subplots(1,2,figsize=(15,5))
   ax[0].imshow(image)
   ax[0].axis('off')
   ax[0].set_title("Image")
-
-  ax[1].hist(image.ravel(), bins=32, range=(0.0, 256.0), ec='k') #calculating histogram
+  ax[1].hist(image[:, :, 0].ravel(), bins=32, range=(0.0, 256.0), ec='r', alpha=0.5, label='Red')
+  ax[1].hist(image[:, :, 1].ravel(), bins=32, range=(0.0, 256.0), ec='g', alpha=0.5, label='Green')
+  ax[1].hist(image[:, :, 2].ravel(), bins=32, range=(0.0, 256.0), ec='b', alpha=0.5, label='Blue')
+  
+  ax[1].hist(image.ravel(), bins=32, range=(0.0, 256.0), ec='k', alpha=0.5, label='all') #calculating histogram
+  ax[1].legend()
+ 
   ax[1].set_title("Histogram")
   ax[1].set_xlabel("range")
   plt.show()
+
+calculate_hist(image)
 
 def compare_matched_hist(src,dst,matched_src):
   images = [src,dst,matched_src]
