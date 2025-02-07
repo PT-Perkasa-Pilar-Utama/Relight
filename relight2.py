@@ -68,11 +68,17 @@ plt.figure(figsize=(10, 5))
 plt.plot(avg_hist, color='k')
 plt.title("cumulative avg color")
 
+linear_increase = np.linspace(0, 1, 256)
+plt.figure(figsize=(10, 5))
+plt.plot(linear_increase, color='k')
+plt.title("Linear Increase from 0 to 1")
+
 height, width, _ = image.shape
 image_size = height * width
 print(f"Image size = {image_size}")
 
 pixels = np.arange(256)
+
 
 
 
