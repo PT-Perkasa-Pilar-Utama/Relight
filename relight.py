@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 from skimage.exposure import cumulative_distribution
-import os
 
 def linear_relight(image):
   
